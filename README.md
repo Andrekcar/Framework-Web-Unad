@@ -1,3 +1,15 @@
+
+
+
+
+Ejemplo prueba
+
+
+
+
+
+
+
 # Impulsa Local - UNAD
 **Curso:** Framework para el desarrollo web - Código: 202047928  
 **Fase 3:** Diseño y planeación tecnológica del proyecto web
@@ -56,7 +68,11 @@ Abre el archivo `.env`
 Ejecuta este comando y copia la llave en la variable del archivo `.env`:
 
 ```bash
+
+
 python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+
+
 ```
 
 `.env` deberia quedar así:
