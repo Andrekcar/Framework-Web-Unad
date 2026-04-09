@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from .models import Emprendedor
- 
+
 # Register your models here.
  
 from .models import Emprendedor
@@ -11,7 +11,7 @@ from .models import Emprendedor
 class EmprendedorAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'tipo_documento', 'documento', 'actividad', 'sector', 'acciones')
     search_fields = ('nombre', 'documento')
- 
+
     fieldsets = (
         (None, {
             'fields': (
@@ -22,7 +22,7 @@ class EmprendedorAdmin(admin.ModelAdmin):
             )
         }),
     )
- 
+
     def acciones(self, obj):
         editar = reverse('admin:core_emprendedor_change', args=[obj.pk])
         eliminar = reverse('admin:core_emprendedor_delete', args=[obj.pk])
@@ -34,5 +34,5 @@ class EmprendedorAdmin(admin.ModelAdmin):
             '</div>',
             editar, editar, eliminar
         )
- 
+
 admin.site.enable_nav_sidebar = False
