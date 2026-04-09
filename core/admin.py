@@ -4,9 +4,9 @@ from django.utils.html import format_html
 from .models import Emprendedor
 
 # Register your models here.
-
+ 
 from .models import Emprendedor
-
+ 
 @admin.register(Emprendedor)
 class EmprendedorAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'tipo_documento', 'documento', 'actividad', 'sector', 'acciones')
