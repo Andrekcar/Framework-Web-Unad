@@ -1,38 +1,36 @@
 from django.contrib import admin
-from django.urls import reverse
 from django.utils.html import format_html
-from .models import Emprendedor
-
-# Register your models here.
- 
+from django.urls import reverse
 from .models import Emprendedor
  
 @admin.register(Emprendedor)
 class EmprendedorAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'tipo_documento', 'documento', 'actividad', 'sector', 'acciones')
+    list_display = ('nombre', 'actividad_economica', 'sector', 'acciones')
     search_fields = ('nombre', 'documento')
 
     fieldsets = (
         (None, {
             'fields': (
                 ('nombre', 'tipo_documento', 'documento'),
-                ('actividad', 'sector'),
+                ('actividad_economica', 'sector'),
                 ('telefono', 'email'),
-                'direccion',    
+                'direccion',
             )
         }),
     )
 
     def acciones(self, obj):
-        editar = reverse('admin:core_emprendedor_change', args=[obj.pk])
-        eliminar = reverse('admin:core_emprendedor_delete', args=[obj.pk])
+        edit = reverse('admin:core_emprendedor_change', args=[obj.pk])
+        delete = reverse('admin:core_emprendedor_delete', args=[obj.pk])
         return format_html(
             '<div>'
             '<a href="{}" title="Ver detalles">?</a>'
-            '<a href="{}" title="Editar">0</a>'
-            '<a href="{}" title="Eliminar">X</a>'
+            '<a href="{}" title="Editar">&#9998;</a>'
+            '<a href="{}" title="Eliminar">&#10005;</a>'
             '</div>',
-            editar, editar, eliminar
+            edit, edit, delete
         )
 
 admin.site.enable_nav_sidebar = False
+   
+

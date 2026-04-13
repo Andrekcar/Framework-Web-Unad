@@ -1,12 +1,12 @@
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+<link href="{% static 'core/css/style.css' %}" rel="stylesheet">
 
 <nav class="sidebar">
     <a href="{% url 'admin:core_emprendedor_add' %}">
-        <span>Formulario de emprendedores</span>
+        <span>Formulario de Emprendedores</span>
     </a>
     <a href="{% url 'admin:core_emprendedor_changelist' %}">
-        <span>Listado de emprendedores</span>
+        <span>Gestor de Emprendedores</span>
     </a>
 </nav>
