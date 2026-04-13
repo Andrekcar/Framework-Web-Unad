@@ -2,17 +2,17 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from .models import Emprendedor
- 
+
 @admin.register(Emprendedor)
 class EmprendedorAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'actividad_economica', 'sector', 'acciones')
+    list_display = ('nombre', 'actividad', 'sector', 'acciones')
     search_fields = ('nombre', 'documento')
 
     fieldsets = (
         (None, {
             'fields': (
                 ('nombre', 'tipo_documento', 'documento'),
-                ('actividad_economica', 'sector'),
+                ('actividad', 'sector'),
                 ('telefono', 'email'),
                 'direccion',
             )
@@ -33,4 +33,3 @@ class EmprendedorAdmin(admin.ModelAdmin):
 
 admin.site.enable_nav_sidebar = False
    
-

@@ -17,6 +17,6 @@
 
 {% block submit_buttons_bottom %}
 <div>
-    <input type="submit" value="REGISTRAR" name="_save">
+    <input type="submit" value="{% if original %}ACTUALIZAR{% else %}REGISTRAR{% endif %}" name="_save">
 </div>
 {% endblock %}
