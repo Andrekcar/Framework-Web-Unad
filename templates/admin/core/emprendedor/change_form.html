@@ -1,0 +1,22 @@
+{% extends "admin/change_form.html" %}
+
+{% block content_title %}
+<h1>{% if original %}Editar emprendedor{% else %}Formulario registro de emprendedor{% endif %}</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+    <aside>
+        {% include "admin/sidebar.html" %}
+    </aside>
+    <main >
+        {{ block.super }}
+    </main>
+</div>
+{% endblock %}
+
+{% block submit_buttons_bottom %}
+<div>
+    <input type="submit" value="REGISTRAR" name="_save">
+</div>
+{% endblock %}

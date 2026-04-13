@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+
+{% block content_title %}
+<h1>vista principal administrador</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+    <aside>
+        {% include "admin/sidebar.html" %}
+    </aside>
+    <main>
+        {{ block.super }}
+    </main>
+</div>
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block branding %}
+<div>
+    <a href="{% url 'admin:index' %}">
+        <span>X Impulsa Local</span>
+    </a>
+</div>
+{% endblock %}
+
+{% block extrastyle %}
+    <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
+{% endblock %}

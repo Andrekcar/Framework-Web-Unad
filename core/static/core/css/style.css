@@ -1,0 +1,66 @@
+:root {
+    --body-bg: #ffffff;        /* fondo principal */
+    --secondary: #4caaf6;    /* color de tu marca */
+    --body-fg: #000;
+}
+
+.breadcrumbs {
+    display: none !important;
+}
+
+.required label, label.required {
+    font-weight: bold;
+    font-weight: normal;
+    color: #000000;   
+}
+
+.sidebar {
+    position: fixed;
+    top: 42px;          
+    left: 0;
+    width: 220px;
+    height: calc(100vh - 42px);  /* Resta la altura del header */
+    background-color: #1870c1;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar a {
+    color: #ffffff;
+    padding: 10px;   
+}
+
+.sidebar a:hover {
+    background-color: rgba(0, 44, 92, 0.2);
+}
+
+#content {
+    margin-left: 250px;
+}
+
+/* Filas normales */
+#result_list tr {
+    background-color: #fff;
+}
+
+/* Filas seleccionadas */
+#result_list tr.selected {
+    background-color: #e8e8e8;
+}
+
+/* Header de la tabla */
+#result_list thead th {
+    background-color: #4caaf6 !important;
+}
+
+#result_list thead th a {
+    color: #fff !important;
+}
+
+/* Fila seleccionada */
+#result_list tr.selected {
+    background-color: #e8e8e8 !important;
+}
+
+
