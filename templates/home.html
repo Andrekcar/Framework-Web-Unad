@@ -1,0 +1,14 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+{% else %}
+<a href="{% url 'login' %}">Iniciar sesión</a>
+&nbsp;|&nbsp;
+<a href="{% url 'password_reset' %}">Soy emprendedor, crear contraseña</a>
+{% endif %}
+{% endblock %}
