@@ -24,6 +24,17 @@ class Emprendedor(models.Model):
         return self.nombre
 
 
+class Programas(models.Model):
+    nombre = models.CharField('Nombre del Programa', max_length=100)
+    descripcion = models.TextField('Descripción del Programa')
+    fecha_inicio = models.DateField('Fecha de Inicio')
+    fecha_fin = models.DateField('Fecha de Fin')
+    cupos = models.IntegerField('Cupos Disponibles')
+
+    def __str__(self):
+        return self.nombre
+
+
 # Escucha la señal post_save del modelo Emprendedor: se ejecuta cada vez que se guarda un Emprendedor
 @receiver(post_save, sender=Emprendedor)
 # Función que crea automáticamente una cuenta de usuario Django al registrar un nuevo Emprendedor
