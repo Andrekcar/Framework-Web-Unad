@@ -1,7 +1,12 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
-from .models import Emprendedor
+from .models import Emprendedor, Programas
+
+@admin.register(Programas)
+class ProgramasAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/core/programas/form.html'
+    list_display = ('nombre', 'fecha_inicio', 'fecha_fin', 'cupos')
 
 @admin.register(Emprendedor)
 class EmprendedorAdmin(admin.ModelAdmin):
