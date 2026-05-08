@@ -18,8 +18,8 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic.base import TemplateView
 from core.forms import EmprendedorPasswordResetForm
+from core.views import home, emp_home, inscribir, guardar_observacion, editar_emprendedor
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,9 @@ urlpatterns = [
         name="password_reset",
     ),
     path("accounts/", include("django.contrib.auth.urls")),
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path("", home, name="home"),
+    path("emprendedor/", emp_home, name="emp_home"),
+    path("inscribir/<int:programa_id>/", inscribir, name="inscribir"),
+    path("emprendedor/observacion/", guardar_observacion, name="guardar_observacion"),
+    path("emprendedor/editar/", editar_emprendedor, name="editar_emprendedor"),
 ]

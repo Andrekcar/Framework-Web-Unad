@@ -5,7 +5,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.conf import settings
 from urllib.parse import urlparse
 
-from .models import Emprendedor
+from .models import Emprendedor, observaciones
 
 
 class EmprendedorPasswordResetForm(PasswordResetForm):
@@ -30,3 +30,18 @@ class EmprendedorPasswordResetForm(PasswordResetForm):
         kwargs.setdefault('domain_override', parsed.netloc)
         kwargs.setdefault('use_https', parsed.scheme == 'https')
         return super().save(*args, **kwargs)
+
+
+class ObservacionForm(forms.ModelForm):
+    class Meta:
+        model = observaciones
+        fields = ['observacion']
+        widgets = {
+            'observacion': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Escribe tu observación aquí...'}),
+        }
+
+
+class EmprendedorForm(forms.ModelForm):
+    class Meta:
+        model = Emprendedor
+        fields = ['nombre', 'actividad', 'sector', 'telefono', 'direccion']

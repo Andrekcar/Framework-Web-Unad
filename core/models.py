@@ -19,10 +19,10 @@ class Emprendedor(models.Model):
     # El email es único porque también se usa como nombre de usuario en el sistema de autenticación
     email = models.EmailField('Correo Electrónico', unique=True)
     direccion = models.CharField('Dirección', max_length=200)
+    programa = models.ForeignKey('Programas', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.nombre
-
 
 class Programas(models.Model):
     nombre = models.CharField('Nombre del Programa', max_length=100)
@@ -34,6 +34,14 @@ class Programas(models.Model):
     def __str__(self):
         return self.nombre
 
+class observaciones (models.Model):
+    emprendedor = models.ForeignKey(Emprendedor, on_delete=models.CASCADE)
+    programa = models.ForeignKey(Programas, on_delete=models.CASCADE)
+    fecha = models.DateTimeField('Fecha de Observación', auto_now_add=True)
+    observacion = models.TextField('Observación')
+
+    def __str__(self):
+        return f'Observación de {self.emprendedor.nombre} del programa {self.programa.nombre}'
 
 # Escucha la señal post_save del modelo Emprendedor: se ejecuta cada vez que se guarda un Emprendedor
 @receiver(post_save, sender=Emprendedor)

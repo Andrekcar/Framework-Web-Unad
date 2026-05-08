@@ -5,10 +5,43 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-Hi {{ user.username }}!
+
+  <div id="programs-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Programa</th>
+          <th>Descripción</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Cupos</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in programs %}
+        <tr>
+          <td>{{ i.nombre }}</td>
+          <td>{{ i.descripcion }}</td>
+          <td>{{ i.fecha_inicio }}</td>
+          <td>{{ i.fecha_fin }}</td>
+          <td>{{ i.cupos }}</td>
+          <td>
+            {% if i.cupos > 0 %}
+              <a href="{% url 'inscribir' i.id %}" class="btn-inscribirse">Inscribirse</a>
+            {% else %}
+              <span class="btn-lleno">Cupos llenos</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
 {% else %}
-<a href="{% url 'login' %}">Iniciar sesión</a>
-&nbsp;|&nbsp;
-<a href="{% url 'password_reset' %}">Soy emprendedor, crear contraseña</a>
+  <a href="{% url 'login' %}">Iniciar sesión</a>
+  &nbsp;|&nbsp;
+  <a href="{% url 'password_reset' %}">Soy emprendedor, crear contraseña</a>
 {% endif %}
 {% endblock %}
