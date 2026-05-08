@@ -56,3 +56,5 @@ def crear_usuario_emprendedor(sender, instance, created, **kwargs):
                 # La contraseña se deja en None (inutilizable) porque el acceso se gestiona por restablecimiento de contraseña
                 password=None,
             )
+            # Nota: después del registro, el emprendedor debe crear su contraseña
+            # usando el flujo de restablecimiento de contraseña en la app.
