@@ -1,0 +1,54 @@
+{% extends 'emprendedor/base.html' %}
+
+{% block title %}Programas Disponibles{% endblock %}
+
+{% block content %}
+<h2 class="section-title">Programas Disponibles</h2>
+
+{% if programas %}
+<div class="table-wrapper">
+  <table class="prog-table">
+    <thead>
+      <tr>
+        <th>Programa</th>
+        <th>Descripción</th>
+        <th>Fecha inicio</th>
+        <th>Fecha fin</th>
+        <th>Cupos</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for programa in programas %}
+      <tr>
+        <td><strong>{{ programa.nombre }}</strong></td>
+        <td>{{ programa.descripcion }}</td>
+        <td>{{ programa.fecha_inicio }}</td>
+        <td>{{ programa.fecha_fin }}</td>
+        <td>
+          {% if programa.cupos > 0 %}
+            <span class="cupos-badge">{{ programa.cupos }}</span>
+          {% else %}
+            <span class="cupos-badge sin-cupos">0</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if emprendedor_programa_id == programa.id %}
+            <span class="btn-ya-inscrito">Tu programa actual</span>
+          {% elif tiene_programa %}
+            <span class="btn-ya-inscrito">Ya tienes un programa</span>
+          {% elif programa.cupos == 0 %}
+            <span class="btn-ya-inscrito">Sin cupos</span>
+          {% else %}
+            <a href="{% url 'inscribir' programa.id %}" class="btn-inscribir">Inscribirme</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+  <p class="no-prog">No hay programas disponibles en este momento.</p>
+{% endif %}
+{% endblock %}
