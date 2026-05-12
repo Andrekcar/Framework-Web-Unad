@@ -1,0 +1,255 @@
+/* Portal emprendedor — estilo plano, sin adornos, igual que el admin */
+:root {
+    --emp-primary:   #4caaf6;   /* mismo que --secondary del admin (style.css) */
+    --emp-sidebar:   #1870c1;
+    --emp-sidebar-w: 220px;
+    --emp-header-h:  42px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-size: 13px;
+    color: #333;
+    background: #f8f9fa;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+#emp-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--emp-header-h);
+    background: var(--emp-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    z-index: 100;
+}
+
+#emp-header #branding a { color: #fff; text-decoration: none; font-size: 18px; font-weight: bold; }
+#emp-header #user-tools { color: #fff; font-size: 13px; display: flex; align-items: center; gap: 10px; }
+
+.emp-logout-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.6);
+    color: #fff;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.emp-logout-btn:hover { background: rgba(255,255,255,0.1); }
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+#emp-sidebar {
+    position: fixed;
+    top: var(--emp-header-h);
+    left: 0;
+    width: var(--emp-sidebar-w);
+    height: calc(100vh - var(--emp-header-h));
+    background: var(--emp-sidebar);
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 90;
+}
+
+#emp-sidebar a { color: #fff; text-decoration: none; padding: 10px; display: block; font-size: 13px; }
+#emp-sidebar a:hover  { background: rgba(0, 44, 92, 0.2); }
+#emp-sidebar a.active { background: rgba(0, 0, 0, 0.2); font-weight: bold; }
+
+/* ── Contenido ───────────────────────────────────────────── */
+#emp-content {
+    margin-left: 250px;
+    margin-top: var(--emp-header-h);
+    padding: 20px 28px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: normal;
+    color: #666;
+    margin-bottom: 16px;
+    padding-bottom: 0;
+}
+
+/* ── Tabla de programas (igual que #result_list del admin) ── */
+.table-wrapper { overflow-x: auto; }
+
+.prog-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 13px;
+}
+
+.prog-table thead th {
+    background-color: #4caaf6;
+    color: #fff;
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.prog-table tbody tr { background: #fff; border-bottom: 1px solid #eee; }
+.prog-table tbody tr:hover { background: #f0f6ff; }
+.prog-table td { padding: 8px 10px; vertical-align: middle; }
+
+.cupos-badge { font-size: 12px; font-weight: bold; color: var(--emp-sidebar); }
+.cupos-badge.sin-cupos { color: #c0392b; }
+
+.btn-inscribir {
+    background: #79aec8;
+    color: #fff;
+    border: none;
+    padding: 5px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 12px;
+    display: inline-block;
+    font-weight: bold;
+}
+.btn-inscribir:hover { background: #609ab6; color: #fff; }
+
+.btn-ya-inscrito {
+    color: #999;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.no-prog { color: #888; font-size: 13px; padding: 10px 0; }
+
+/* ── Tarjeta del programa inscrito ───────────────────────── */
+.prog-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 16px;
+    max-width: 480px;
+    cursor: pointer;
+}
+.prog-card:hover { background: #f9f9f9; }
+.prog-card h3 { color: var(--emp-sidebar); margin-bottom: 10px; font-size: 15px; }
+.prog-card .prog-info { font-size: 13px; color: #555; }
+.prog-card .prog-info p { margin: 4px 0; }
+
+.btn-obs {
+    margin-top: 14px;
+    background: #79aec8;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+.btn-obs:hover { background: #609ab6; }
+
+/* ── Modal de observaciones ──────────────────────────────── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 24px 28px;
+    width: 460px;
+    max-width: 95vw;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px; right: 14px;
+    background: none; border: none;
+    font-size: 20px; cursor: pointer;
+    color: #888; line-height: 1;
+}
+.modal-close:hover { color: #333; }
+
+.modal-box h3 { color: var(--emp-sidebar); margin-bottom: 4px; font-size: 15px; }
+.modal-box .modal-subtitle { color: #888; font-size: 12px; margin-bottom: 12px; }
+
+.modal-box textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 13px;
+    resize: vertical;
+    min-height: 100px;
+}
+.modal-box textarea:focus { outline: none; border-color: #999; }
+
+.modal-submit {
+    margin-top: 10px;
+    background: #79aec8;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    width: 100%;
+    font-weight: bold;
+}
+.modal-submit:hover { background: #609ab6; }
+
+/* ── Formulario Mis Datos (estilo change_form del admin) ──── */
+.adm-page-title { font-size: 20px; font-weight: normal; color: #447e9b; margin-bottom: 14px; }
+
+.adm-form-wrap { max-width: 900px; }
+
+.adm-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.adm-field { display: flex; align-items: center; gap: 6px; }
+
+.adm-field label { font-size: 13px; color: #666; white-space: nowrap; }
+
+.adm-field input[type="text"],
+.adm-field input[type="email"],
+.adm-field input[type="tel"],
+.adm-field select,
+.adm-field textarea {
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    font-size: 13px;
+    color: #333;
+    min-width: 220px;
+}
+.adm-field input:focus,
+.adm-field select:focus,
+.adm-field textarea:focus { outline: none; border-color: #999; }
+
+.adm-readonly { font-size: 13px; color: #333; padding: 5px 0; }
+.adm-error { width: 100%; font-size: 12px; color: #ba2121; margin: 0; }
+
+.adm-submit-row { padding: 12px 0; }
+
+.adm-btn-save {
+    background: #79aec8;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.adm-btn-save:hover { background: #609ab6; }
