@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Impulsa Local{% endblock %} | Impulsa Local</title>
+  <link rel="stylesheet" href="{% static 'core/css/emp_style.css' %}?v=5">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Header: height 42px, matches admin -->
+  <div id="emp-header">
+    <div id="branding">
+      <a href="{% url 'emp_home' %}">Impulsa Local</a>
+    </div>
+    {% if user.is_authenticated %}
+    <div id="user-tools">
+      Bienvenido, <strong>{{ user.username }}</strong>
+      <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="emp-logout-btn">Cerrar sesión</button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Sidebar: width 220px, fixed left, matches admin -->
+  <nav id="emp-sidebar">
+    {% include 'emprendedor/sidebar.html' %}
+  </nav>
+
+  <!-- Content: margin-left 250px, matches admin #content -->
+  <div id="emp-content">
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>
