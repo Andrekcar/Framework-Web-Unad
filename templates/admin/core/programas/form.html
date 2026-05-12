@@ -1,14 +1,12 @@
 {% extends "admin/change_list.html" %}
 
-{# Vista de lista de emprendedores en el administrador. #}
 {% block content_title %}
-<h1>Gestor de emprendedores</h1>
+<h1>Gestor de Programas</h1>
 {% endblock %}
 
 {% block content %}
-<div class="gestor-emprendedores">
+<div>
     <aside>
-        {# Navegación lateral para el administrador de emprendedores. #}
         {% include "admin/sidebar.html" %}
     </aside>
     <main>
@@ -17,4 +15,3 @@
 </div>
 {% endblock %}
 
-{% block search %}{% endblock %}

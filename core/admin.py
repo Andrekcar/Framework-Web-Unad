@@ -1,7 +1,14 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
-from .models import Emprendedor
+from .models import Emprendedor, Programas, observaciones
+
+@admin.register(Programas)
+class ProgramasAdmin(admin.ModelAdmin):
+    # Plantilla personalizada para administrar programas de capacitación.
+    change_list_template = 'admin/core/programas/form.html'
+    list_display = ('nombre', 'fecha_inicio', 'fecha_fin', 'cupos')
+
 
 @admin.register(Emprendedor)
 class EmprendedorAdmin(admin.ModelAdmin):
@@ -10,6 +17,7 @@ class EmprendedorAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
+            # Campos agrupados para facilitar la edición/registro de datos del emprendedor.
             'fields': (
                 ('nombre', 'tipo_documento', 'documento'),
                 ('actividad', 'sector'),
@@ -20,6 +28,7 @@ class EmprendedorAdmin(admin.ModelAdmin):
     )
 
     def acciones(self, obj):
+        # Enlaces rápidos en la lista de emprendedores: editar y eliminar.
         edit = reverse('admin:core_emprendedor_change', args=[obj.pk])
         delete = reverse('admin:core_emprendedor_delete', args=[obj.pk])
         return format_html(
@@ -30,6 +39,20 @@ class EmprendedorAdmin(admin.ModelAdmin):
             '</div>',
             edit, edit, delete
         )
+
+@admin.register(observaciones)
+class ObservacionesAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/core/emprendedor/change_obs_form.html'
+    list_display = ('emprendedor', 'programa', 'fecha', 'observacion')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 admin.site.enable_nav_sidebar = False
    

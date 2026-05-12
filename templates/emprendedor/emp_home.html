@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>Bienvenido a tu panel de emprendedor</h2>
+<p>Aquí podrás ver los programas a los que estás inscrito y gestionar tu información.</p>
+{% if emprendedor.programa %}
+  <h3>Programa Inscrito</h3>
+  <p><strong>Nombre del Programa:</strong> {{ emprendedor.programa.nombre }}</p>
+  <p><strong>Descripción:</strong> {{ emprendedor.programa.descripcion }}</p>
+  <p><strong>Fecha de Inicio:</strong> {{ emprendedor.programa.fecha_inicio }}</p>
+  <p><strong>Fecha de Fin:</strong> {{ emprendedor.programa.fecha_fin }}</p>
+
+  <h3>Observaciones</h3>
+  <form method="post" action="{% url 'guardar_observacion' %}">
+    {% csrf_token %}
+    {{ observacion_form.as_p }}
+    <button type="submit">Guardar Observación</button>
+  </form>
+{% else %}
+  <p>No estás inscrito en ningún programa actualmente. Explora los programas disponibles para inscribirte.</p>
+{% endif %}
+
+<h3>Editar mis datos</h3>
+<form method="post" action="{% url 'editar_emprendedor' %}">
+  {% csrf_token %}
+  {{ emprendedor_form.as_p }}
+  <button type="submit">Guardar cambios</button>
+</form>
+
+{% endblock %}

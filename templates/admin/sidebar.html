@@ -3,10 +3,17 @@
 <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
 
 <nav class="sidebar">
+    {# Enlaces rápidos del módulo de administración. #}
     <a href="{% url 'admin:core_emprendedor_add' %}">
         <span>Formulario de Emprendedores</span>
     </a>
     <a href="{% url 'admin:core_emprendedor_changelist' %}">
         <span>Gestor de Emprendedores</span>
+    </a>
+    <a href="{% url 'admin:core_programas_changelist' %}">
+        <span>Programas de capacitacion</span>
+    </a>
+    <a href="{% url 'admin:core_observaciones_changelist' %}">
+        <span>Observaciones Programas</span>
     </a>
 </nav>

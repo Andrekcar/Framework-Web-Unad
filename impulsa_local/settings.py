@@ -37,8 +37,10 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
+    # Activa el sistema de autenticación de Django: usuarios, grupos y permisos
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    # Habilita el manejo de sesiones de usuario (necesario para mantener la sesión iniciada entre peticiones)
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -47,9 +49,12 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    # Gestiona la creación, lectura y expiración de la sesión del usuario en cada petición
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    # Protege los formularios de autenticación contra ataques CSRF (Cross-Site Request Forgery)
     "django.middleware.csrf.CsrfViewMiddleware",
+    # Asocia al usuario autenticado con cada petición HTTP leyendo su sesión activa
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -65,6 +70,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.request",
+                # Inyecta en todas las plantillas la variable 'user' con el usuario autenticado actual
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
@@ -85,21 +91,36 @@ DATABASES = {
     }
 }
 
+# URL a la que Django redirige al usuario después de iniciar sesión correctamente
+LOGIN_REDIRECT_URL = "/"
+# URL base del sitio usada para construir el enlace de restablecimiento de contraseña en el correo
+SITE_URL = os.environ.get("SITE_URL", "http://localhost:8000")
+# URL donde Django redirige a usuarios no autenticados que intentan acceder a vistas protegidas
+LOGIN_URL = "/accounts/login/"
+
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend"
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
+# Lista de validadores que Django aplica al crear o cambiar contraseñas de usuario
 AUTH_PASSWORD_VALIDATORS = [
     {
+        # Rechaza contraseñas demasiado similares al nombre de usuario, email u otros atributos del perfil
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
+        # Exige que la contraseña tenga al menos 8 caracteres (longitud mínima predeterminada)
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
+        # Rechaza contraseñas que aparezcan en la lista de contraseñas comunes (p.ej. "password", "123456")
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
+        # Rechaza contraseñas compuestas únicamente de números para forzar mayor complejidad
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
@@ -121,5 +142,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # settings.py
