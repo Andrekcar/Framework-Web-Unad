@@ -41,6 +41,13 @@ _cs_domain = os.environ.get("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN", "app.git
 if _codespace:
     ALLOWED_HOSTS.append(f"{_codespace}-8000.{_cs_domain}")
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.ngrok-free.app",
+    "https://*.ngrok.io",
+]
+if _codespace:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{_codespace}-8000.{_cs_domain}")
+
 
 # Application definition
 
