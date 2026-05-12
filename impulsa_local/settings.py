@@ -124,7 +124,7 @@ EMAIL_BACKEND = os.environ.get(
     "EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend"
 )
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "webmaster@localhost")
-PASSWORD_RESET_TIMEOUT = 604800  # 7 días en segundos
+PASSWORD_RESET_TIMEOUT = 6048000  # 7 días en segundos
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
