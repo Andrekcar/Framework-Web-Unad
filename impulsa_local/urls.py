@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path, include
 from core.forms import EmprendedorPasswordResetForm
-from core.views import home, emp_home, inscribir, guardar_observacion, editar_emprendedor
+from core.views import home, emp_home, inscribir, guardar_observacion, editar_emprendedor, programas_list
 
 urlpatterns = [
     # Ruta para el panel de administración de Django
