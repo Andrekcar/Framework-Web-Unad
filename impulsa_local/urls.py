@@ -22,16 +22,31 @@ from core.forms import EmprendedorPasswordResetForm
 from core.views import home, emp_home, inscribir, guardar_observacion, editar_emprendedor
 
 urlpatterns = [
+    # Ruta para el panel de administración de Django
     path('admin/', admin.site.urls),
+    
+    #  formulario para ingresar el correo y reestablecer la contraseña
     path(
         "accounts/password_reset/",
         auth_views.PasswordResetView.as_view(form_class=EmprendedorPasswordResetForm),
         name="password_reset",
     ),
+    
+    # Incluye todas las URLs de autenticación estándar de Django (login, logout, password_change, etc.)
     path("accounts/", include("django.contrib.auth.urls")),
+    
+    # Página de inicio principal del sitio
     path("", home, name="home"),
+    
+    # Página de inicio exclusiva para emprendedores
     path("emprendedor/", emp_home, name="emp_home"),
+    
+    # Ruta para inscribir a un emprendedor en un programa específico (requiere ID del programa)
     path("inscribir/<int:programa_id>/", inscribir, name="inscribir"),
+    
+    # Ruta para guardar observaciones relacionadas con emprendedores
     path("emprendedor/observacion/", guardar_observacion, name="guardar_observacion"),
+    
+    # Ruta para editar la información de un emprendedor
     path("emprendedor/editar/", editar_emprendedor, name="editar_emprendedor"),
 ]
