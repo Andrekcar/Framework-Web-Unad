@@ -1,0 +1,81 @@
+{% extends 'emprendedor/base.html' %}
+
+{% block title %}Mis Datos{% endblock %}
+
+{% block content %}
+<h1 class="adm-page-title">Mis Datos</h1>
+
+<div class="adm-form-wrap">
+  <form method="post" action="{% url 'editar_emprendedor' %}">
+    {% csrf_token %}
+
+    <!-- Fila 1: nombre -->
+    <div class="adm-row">
+      <div class="adm-field">
+        <label for="{{ form.nombre.id_for_label }}">Nombre completo:</label>
+        {{ form.nombre }}
+      </div>
+      {% if form.nombre.errors %}
+        <p class="adm-error">{{ form.nombre.errors|join:", " }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Fila 2: actividad + sector -->
+    <div class="adm-row">
+      <div class="adm-field">
+        <label for="{{ form.actividad.id_for_label }}">Actividad Económica:</label>
+        {{ form.actividad }}
+      </div>
+      <div class="adm-field">
+        <label for="{{ form.sector.id_for_label }}">Sector:</label>
+        {{ form.sector }}
+      </div>
+      {% if form.actividad.errors or form.sector.errors %}
+        <p class="adm-error">{{ form.actividad.errors|join:", " }} {{ form.sector.errors|join:", " }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Fila 3: telefono + correo (solo lectura) -->
+    <div class="adm-row">
+      <div class="adm-field">
+        <label for="{{ form.telefono.id_for_label }}">Teléfono:</label>
+        {{ form.telefono }}
+      </div>
+      <div class="adm-field">
+        <label>Correo Electrónico:</label>
+        <span class="adm-readonly">{{ emprendedor.email }}</span>
+      </div>
+      {% if form.telefono.errors %}
+        <p class="adm-error">{{ form.telefono.errors|join:", " }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Fila 4: direccion -->
+    <div class="adm-row">
+      <div class="adm-field">
+        <label for="{{ form.direccion.id_for_label }}">Dirección:</label>
+        {{ form.direccion }}
+      </div>
+      {% if form.direccion.errors %}
+        <p class="adm-error">{{ form.direccion.errors|join:", " }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Fila 5: documento (solo lectura) -->
+    <div class="adm-row">
+      <div class="adm-field">
+        <label>Tipo documento:</label>
+        <span class="adm-readonly">{{ emprendedor.get_tipo_documento_display }}</span>
+      </div>
+      <div class="adm-field">
+        <label>Documento:</label>
+        <span class="adm-readonly">{{ emprendedor.documento }}</span>
+      </div>
+    </div>
+
+    <div class="adm-submit-row">
+      <input type="submit" value="GUARDAR" class="adm-btn-save">
+    </div>
+  </form>
+</div>
+{% endblock %}
