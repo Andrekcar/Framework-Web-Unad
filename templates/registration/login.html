@@ -1,13 +1,30 @@
 {% extends "base.html" %}
-
-{% block title %}Iniciar sesión{% endblock %}
+{% load static %}
 
 {% block content %}
-<h2>Iniciar sesión</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Iniciar sesión</button>
-</form>
-<p><a href="{% url 'password_reset' %}">¿Soy emprendedor, cómo creo mi contraseña?</a></p>
+<main class="login-wrapper">
+    <h1>Iniciar Sesión</h1>
+    
+    <section class="login-card">
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="field">
+                <label>Correo Electrónico</label>
+                <input type="email" name="username" required>
+            </div>
+
+            <div class="field">
+                <label>Contraseña</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <button type="submit">INGRESAR</button>
+        </form>
+
+        <p class="helper-text">
+            <a href="#">¿Soy emprendedor, como creo mi contraseña?</a>
+        </p>
+    </section>
+</main>
 {% endblock %}

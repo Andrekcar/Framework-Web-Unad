@@ -3,7 +3,12 @@
 {% block title %}Sesión cerrada{% endblock %}
 
 {% block content %}
-<h2>Sesión cerrada</h2>
-<p>Has cerrado sesión exitosamente.</p>
-<a href="{% url 'login' %}">Volver a iniciar sesión</a>
+<main class="login-wrapper">
+    <h1>Sesión cerrada</h1>
+
+    <section class="login-card">
+        <p>Has cerrado sesión exitosamente.</p>
+        <p><a href="{% url 'login' %}">Volver a iniciar sesión</a></p>
+    </section>
+</main>
 {% endblock %}
