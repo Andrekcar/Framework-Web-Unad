@@ -31,6 +31,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [h for h in os.environ.get("ALLOWED_HOSTS", "").split(",") if h]
+ALLOWED_HOSTS += [".ngrok-free.app", ".ngrok.io"]
 
 # En GitHub Codespaces cada instancia tiene un subdominio distinto.
 # CODESPACE_NAME es una variable que Codespaces inyecta automáticamente,
