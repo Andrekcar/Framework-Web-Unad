@@ -30,7 +30,15 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = [h for h in os.environ.get("ALLOWED_HOSTS", "").split(",") if h]
+
+# En GitHub Codespaces cada instancia tiene un subdominio distinto.
+# CODESPACE_NAME es una variable que Codespaces inyecta automáticamente,
+# así no hay que tocar .env cuando la instancia cambia.
+_codespace = os.environ.get("CODESPACE_NAME")
+_cs_domain = os.environ.get("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN", "app.github.dev")
+if _codespace:
+    ALLOWED_HOSTS.append(f"{_codespace}-8000.{_cs_domain}")
 
 
 # Application definition
@@ -92,9 +100,13 @@ DATABASES = {
 }
 
 # URL a la que Django redirige al usuario después de iniciar sesión correctamente
-LOGIN_REDIRECT_URL = "/"
-# URL base del sitio usada para construir el enlace de restablecimiento de contraseña en el correo
-SITE_URL = os.environ.get("SITE_URL", "http://localhost:8000")
+LOGIN_REDIRECT_URL = "/emprendedor/programas/"
+# Fallback para contextos sin request (e.g. management commands).
+# Cuando hay request disponible, forms.py usa request.get_host() en su lugar.
+if _codespace:
+    SITE_URL = f"https://{_codespace}-8000.{_cs_domain}"
+else:
+    SITE_URL = os.environ.get("SITE_URL", "http://localhost:8000")
 # URL donde Django redirige a usuarios no autenticados que intentan acceder a vistas protegidas
 LOGIN_URL = "/accounts/login/"
 
