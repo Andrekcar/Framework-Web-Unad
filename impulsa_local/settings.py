@@ -103,16 +103,20 @@ DATABASES = {
 LOGIN_REDIRECT_URL = "/emprendedor/programas/"
 # Fallback para contextos sin request (e.g. management commands).
 # Cuando hay request disponible, forms.py usa request.get_host() en su lugar.
-if _codespace:
-    SITE_URL = f"https://{_codespace}-8000.{_cs_domain}"
-else:
-    SITE_URL = os.environ.get("SITE_URL", "http://localhost:8000")
+SITE_URL = os.environ.get("SITE_URL")
+if not SITE_URL:
+    if _codespace:
+        SITE_URL = f"https://{_codespace}-8000.{_cs_domain}"
+    else:
+        SITE_URL = "http://localhost:8000"
 # URL donde Django redirige a usuarios no autenticados que intentan acceder a vistas protegidas
 LOGIN_URL = "/accounts/login/"
 
 EMAIL_BACKEND = os.environ.get(
     "EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend"
 )
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "webmaster@localhost")
+PASSWORD_RESET_TIMEOUT = 86400  # 24 horas en segundos
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

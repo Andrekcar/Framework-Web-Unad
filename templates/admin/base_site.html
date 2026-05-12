@@ -12,3 +12,7 @@
 {% block extrastyle %}
     <link href="{% static 'core/css/style.css' %}?v={% now "U" %}" rel="stylesheet">
 {% endblock %}
+
+{% block nav-sidebar %}
+{% include "admin/sidebar.html" %}
+{% endblock %}

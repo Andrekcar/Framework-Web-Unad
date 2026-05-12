@@ -49,4 +49,7 @@ urlpatterns = [
     
     # Ruta para editar la información de un emprendedor
     path("emprendedor/editar/", editar_emprendedor, name="editar_emprendedor"),
+
+    # Ruta para listar programas disponibles
+    path("emprendedor/programas/", programas_list, name="programas_list"),
 ]
