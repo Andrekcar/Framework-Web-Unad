@@ -1,66 +1,188 @@
-:root {
-    --body-bg: #ffffff;        /* fondo principal */
-    --secondary: #4caaf6;    /* color de tu marca */
-    --body-fg: #000;
+/* Encabezado azul vibrante */
+#header {
+    background-color: #55acee;
+    color: #ffffff;
+    padding: 20px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.breadcrumbs {
-    display: none !important;
+#header #branding a,
+#header #user-tools,
+#header #user-tools strong,
+#header #user-tools button {
+    color: #ffffff;
 }
 
-.required label, label.required {
-    font-weight: bold;
-    font-weight: normal;
-    color: #000000;   
+#header #branding a {
+    text-decoration: none;
 }
 
-.sidebar {
-    position: fixed;
-    top: 42px;          
-    left: 0;
-    width: 220px;
-    height: calc(100vh - 42px);  /* Resta la altura del header */
-    background-color: #1870c1;
-    padding: 20px 15px;
+/* fuente del título en el encabezado */
+#header #branding h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    padding-left: 20px;
+}
+
+#header #branding a:hover {
+    text-decoration: underline;
+}
+
+/* Contenedor principal gris claro */
+.login-wrapper {
+    background-color: #e9ecef;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    height: 100vh;
 }
 
-.sidebar a {
+/* Título robusto */
+.login-wrapper h1 {
+    font-family: Arial, sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Tarjeta Blanca con borde grueso */
+.login-card {
+    background-color: white;
+    border: 3px solid #000;
+    border-radius: 4px; /* Esquinas redondeadas */
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Espaciado de campos y etiquetas */
+.login-card .field {
+    margin-bottom: 20px;
+}
+
+.login-card label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: Arial, sans-serif;
+}
+
+/* Inputs con borde negro y redondeados */
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #000;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+/* Botón ingresar */
+.login-card button {
+    width: 100%;
+    background-color: #55acee;
+    color: #000;
+    border: 3px solid #000;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Enlace inferior */
+.login-card .helper-text {
+    text-align: center;
+    margin-top: 25px;
+    font-family: Arial, sans-serif;
+}
+
+.login-card .helper-text a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Estilos para la página home */
+body {
+    background-color: #e9ecef;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#content-main {
+    padding: 30px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Tabla de programas */
+#programs-table {
+    background-color: white;
+    border: 3px solid #000;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#programs-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#programs-table thead {
+    background-color: #55acee;
     color: #ffffff;
-    padding: 10px;   
 }
 
-.sidebar a:hover {
-    background-color: rgba(0, 44, 92, 0.2);
+#programs-table th {
+    padding: 12px;
+    text-align: left;
+    border: 2px solid #000;
+    font-weight: bold;
 }
 
-#content {
-    margin-left: 250px;
+#programs-table td {
+    padding: 12px;
+    border: 2px solid #000;
 }
 
-/* Filas normales */
-#result_list tr {
-    background-color: #fff;
+#programs-table tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
 }
 
-/* Filas seleccionadas */
-#result_list tr.selected {
-    background-color: #e8e8e8;
+/* Botones de acciones */
+.btn-inscribirse {
+    background-color: #55acee;
+    color: #000;
+    padding: 8px 16px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
 }
 
-/* Header de la tabla */
-#result_list thead th {
-    background-color: #4caaf6 !important;
+.btn-inscribirse:hover {
+    background-color: #3fa0d9;
 }
 
-#result_list thead th a {
-    color: #fff !important;
+.btn-lleno {
+    background-color: #d9d9d9;
+    color: #666;
+    padding: 8px 16px;
+    border: 2px solid #666;
+    border-radius: 8px;
+    display: inline-block;
+    font-weight: bold;
 }
 
-/* Fila seleccionada */
-#result_list tr.selected {
-    background-color: #e8e8e8 !important;
+/* Enlaces para usuarios no autenticados */
+#content-main a {
+    color: #55acee;
+    text-decoration: underline;
 }
 
+#content-main a:hover {
+    color: #3fa0d9;
+}
 

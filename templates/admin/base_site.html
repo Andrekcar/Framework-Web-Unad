@@ -10,5 +10,5 @@
 {% endblock %}
 
 {% block extrastyle %}
-    <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/style.css' %}?v={% now "U" %}" rel="stylesheet">
 {% endblock %}
