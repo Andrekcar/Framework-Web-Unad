@@ -1,4 +1,20 @@
-/* Encabezado azul vibrante */
+/* ================================================================
+   STYLE.CSS — Estilos generales: registro/login + admin
+   ─────────────────────────────────────────────────────────────
+   Sin prefijo   → páginas de registro / login (body sin clase)
+   body.admin    → exclusivo del admin (mayor especificidad,
+                   no contamina las páginas de registro)
+   ================================================================ */
+
+/* ── Body base (registro y páginas generales) ────────────────── */
+body {
+    background-color: #e9ecef;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Encabezado (registro y páginas generales) ───────────────── */
 #header {
     background-color: #55acee;
     color: #ffffff;
@@ -17,7 +33,6 @@
     text-decoration: none;
 }
 
-/* fuente del título en el encabezado */
 #header #branding h1 {
     margin: 0;
     font-size: 1.5rem;
@@ -28,7 +43,7 @@
     text-decoration: underline;
 }
 
-/* Contenedor principal gris claro */
+/* ── Contenedor de login / registro ──────────────────────────── */
 .login-wrapper {
     background-color: #e9ecef;
     display: flex;
@@ -38,24 +53,22 @@
     height: 100vh;
 }
 
-/* Título robusto */
 .login-wrapper h1 {
     font-family: Arial, sans-serif;
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
 
-/* Tarjeta Blanca con borde grueso */
+/* ── Tarjeta de login / registro ─────────────────────────────── */
 .login-card {
     background-color: white;
     border: 3px solid #000;
-    border-radius: 4px; /* Esquinas redondeadas */
+    border-radius: 4px;
     padding: 40px;
     width: 100%;
     max-width: 450px;
 }
 
-/* Espaciado de campos y etiquetas */
 .login-card .field {
     margin-bottom: 20px;
 }
@@ -66,7 +79,6 @@
     font-family: Arial, sans-serif;
 }
 
-/* Inputs con borde negro y redondeados */
 .login-card input {
     width: 100%;
     padding: 12px;
@@ -75,7 +87,6 @@
     box-sizing: border-box;
 }
 
-/* Botón ingresar */
 .login-card button {
     width: 100%;
     background-color: #55acee;
@@ -88,7 +99,6 @@
     font-size: 1rem;
 }
 
-/* Enlace inferior */
 .login-card .helper-text {
     text-align: center;
     margin-top: 25px;
@@ -100,21 +110,23 @@
     color: #000;
 }
 
-/* Estilos para la página home */
-body {
-    background-color: #e9ecef;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
+/* ── Contenido principal (páginas generales) ─────────────────── */
 #content-main {
     padding: 30px 20px;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-/* Tabla de programas */
+#content-main a {
+    color: #55acee;
+    text-decoration: underline;
+}
+
+#content-main a:hover {
+    color: #3fa0d9;
+}
+
+/* ── Tabla de programas (páginas generales) ──────────────────── */
 #programs-table {
     background-color: white;
     border: 3px solid #000;
@@ -149,7 +161,7 @@ body {
     background-color: #f0f0f0;
 }
 
-/* Botones de acciones */
+/* ── Botones de acción (páginas generales) ───────────────────── */
 .btn-inscribirse {
     background-color: #55acee;
     color: #000;
@@ -176,46 +188,423 @@ body {
     font-weight: bold;
 }
 
-/* Enlaces para usuarios no autenticados */
-#content-main a {
-    color: #55acee;
+/* ================================================================
+   A PARTIR DE AQUÍ: solo afectan al admin (body.admin)
+   Mayor especificidad → sobreescriben las reglas genéricas arriba
+   sin tocar las páginas de registro / emprendedores.
+   ================================================================ */
+
+/* ── Encabezado fijo en el admin ─────────────────────────────── */
+body.admin #header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    padding: 0 16px 0 240px; /* 240 = sidebar 220px + gap 20px */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    z-index: 95;
+    box-sizing: border-box;
+}
+
+body.admin #header #user-tools {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+/* ── Sidebar lateral fijo en el admin ────────────────────────── */
+body.admin .sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 220px;
+    height: calc(100vh - 70px);
+    background-color: #1870c1;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 90;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+body.admin .sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    font-size: 13px;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    font-weight: normal;
+    margin-bottom: 0;
+    transition: background-color 0.2s;
+}
+
+body.admin .sidebar a:hover {
+    background: rgba(0, 44, 92, 0.2);
+    color: #ffffff;
+}
+
+body.admin .sidebar a span {
+    display: block;
+}
+
+/* ── Área de contenido en el admin ───────────────────────────── */
+
+/* Desplaza TODO el contenido debajo del header fijo de 70px.
+   Se aplica a #container porque #content-wrap no existe en
+   todas las versiones de Django Admin. */
+body.admin #container {
+    padding-top: 70px;
+}
+
+/* Evitar doble offset si #content-wrap también existe */
+body.admin #content-wrap {
+    padding-top: 0;
+}
+
+body.admin #main {
+    margin-left: 220px;
+}
+
+body.admin #content {
+    padding: 20px 28px;
+    background-color: #e9ecef;
+    min-height: calc(100vh - 70px);
+    box-sizing: border-box;
+}
+
+body.admin #content-main {
+    margin: 0;
+    max-width: none;
+    padding: 0;
+}
+
+/* Breadcrumbs */
+body.admin .breadcrumbs {
+    display: none;
+}
+
+body.admin .breadcrumbs a {
+    color: #1870c1;
+    text-decoration: none;
+}
+
+/* Título de sección (h1 del content_title block) */
+body.admin #content h1 {
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: #333;
+    margin: 0 0 14px 0;
+    padding: 0;
+}
+
+/* ── Barra de acciones del changelist ────────────────────────── */
+body.admin .actions {
+    background-color: transparent !important;
+    color: #333 !important;
+}
+
+/* ── Tablas del changelist en el admin ───────────────────────── */
+body.admin #result_list {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    font-size: 13px;
+}
+
+body.admin #result_list thead th {
+    background-color: #55acee;
+    color: #ffffff;
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+body.admin #result_list thead th a,
+body.admin #result_list thead th a:link,
+body.admin #result_list thead th a:visited,
+body.admin #result_list thead th a:hover {
+    color: #ffffff !important;
+}
+
+body.admin #result_list tbody tr {
+    color: #000000 !important;
+    border-bottom: 1px solid #eee;
+    background-color: #ffffff;
+}
+
+body.admin #result_list tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+body.admin #result_list tbody tr:hover {
+    background-color: #d9d9d9;
+}
+
+body.admin #result_list tbody tr td {
+    color: #000000 !important;
+    padding: 8px 10px;
+    vertical-align: middle;
+}
+
+body.admin #result_list tbody tr td a {
+    color: #000000 !important;
+    text-decoration: none;
+}
+
+body.admin #result_list tbody tr td a:hover {
+    text-decoration: underline;
+    color: #1870c1 !important;
+}
+
+/* ── Módulos del admin ───────────────────────────────────────── */
+body.admin .module {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+body.admin .module h2,
+body.admin .module caption {
+    background-color: #55acee;
+    color: #ffffff;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* ── Formularios en el admin ─────────────────────────────────── */
+body.admin .form-row {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+body.admin fieldset {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 14px;
+    background: #ffffff;
+}
+
+/* ── Paginador en el admin ───────────────────────────────────── */
+body.admin .paginator {
+    background-color: transparent !important;
+    font-size: 13px;
+    padding: 8px 0;
+    color: #333;
+}
+
+body.admin .paginator a {
+    color: #1870c1;
+    text-decoration: none;
+}
+
+body.admin .paginator a:hover {
     text-decoration: underline;
 }
 
-#content-main a:hover {
-    color: #3fa0d9;
+/* ── Sobreescritura de clases nativas Django Admin ───────────── */
+body.admin .object-tools {
+    color: #1870c1;
 }
 
-/* Estilos para la sidebar del admin */
-.sidebar {
-    display: block;
-    background-color: #f8f9fa;
-    border: 2px solid #000;
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 20px;
+body.admin .actions {
+    color: #1870c1;
+}
+
+body.admin .text {
+    color: #ffffff;
+}
+
+body.admin .paginator {
+    color: #ffffff;
+}
+
+body.admin .vTextField {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+
+body.admin select,
+body.admin .vSelect {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+
+/* ── Mensajes flash en el admin ──────────────────────────────── */
+body.admin .messagelist {
+    padding: 0;
+    margin: 0 0 16px 0;
+    list-style: none;
+}
+
+body.admin .messagelist li {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+body.admin .messagelist li.success { background: #dff0d8; color: #3c763d; }
+body.admin .messagelist li.error   { background: #f2dede; color: #a94442; }
+body.admin .messagelist li.warning { background: #fcf8e3; color: #8a6d3b; }
+
+/* ================================================================
+   LOGIN DEL ADMIN (body.admin.login)
+   Django añade la clase "login" al body en la página de acceso.
+   ================================================================ */
+
+/* Ocultar sidebar (no hay sesión iniciada aún) */
+body.admin.login .sidebar {
+    display: none !important;
+}
+
+/* Ocultar el branding del header solo en el login */
+body.admin.login #header #branding {
+    display: none !important;
+}
+
+/* Fondo y estructura completa */
+body.admin.login,
+body.admin.login #container,
+body.admin.login #content-wrap,
+body.admin.login #main,
+body.admin.login #content,
+body.admin.login #content-main {
+    background-color: #e9ecef !important;
+}
+
+/* Sin márgenes del sidebar */
+body.admin.login #main {
+    margin-left: 0 !important;
+}
+
+/* En el login el container ya tiene 70px del padre, no añadir más */
+body.admin.login #container {
+    padding-top: 70px !important;
+}
+
+body.admin.login #content-wrap {
+    padding-top: 0 !important;
+}
+
+/* Centrar el formulario */
+body.admin.login #content {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px !important;
+    min-height: 0 !important;
+}
+
+body.admin.login #content-main {
     width: 100%;
+    max-width: 450px;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.sidebar a {
+/* ── Neutralizar el recuadro de módulo que crea Django ────────
+   #login-form es un div.module → hereda border y h2 azul.
+   Los reseteamos aquí antes de aplicar el estilo propio.       */
+body.admin.login .module,
+body.admin.login #login-form {
+    border: none !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.admin.login .module h2,
+body.admin.login .module caption,
+body.admin.login #login-form h2,
+body.admin.login #login-form h1 {
+    background: none !important;
+    color: #333 !important;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 0 18px 0 !important;
+    margin: 0 !important;
+}
+
+/* Sin cajas de fieldset dentro del login */
+body.admin.login fieldset {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+}
+
+/* ── Tarjeta real del formulario ─────────────────────────────── */
+body.admin.login #login-form form {
+    background-color: #ffffff;
+    border: 3px solid #000;
+    border-radius: 4px;
+    padding: 36px 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.admin.login #login-form .form-row {
+    margin-bottom: 18px;
+    border-bottom: none !important;
+    padding: 0 !important;
+}
+
+body.admin.login #login-form label {
     display: block;
-    padding: 12px;
     margin-bottom: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: #333 !important;
+}
+
+body.admin.login #login-form input[type="text"],
+body.admin.login #login-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #000;
+    border-radius: 12px;
+    box-sizing: border-box;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 1rem;
+}
+
+/* Botón Log in */
+body.admin.login #login-form .submit-row {
+    margin-top: 8px;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+body.admin.login #login-form .submit-row input[type="submit"] {
+    width: 100%;
     background-color: #55acee;
     color: #000;
-    text-decoration: none;
-    border-radius: 4px;
-    border: 2px solid #000;
+    border: 3px solid #000;
+    border-radius: 12px;
+    padding: 12px;
     font-weight: bold;
-    transition: background-color 0.3s;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
-.sidebar a:hover {
+body.admin.login #login-form .submit-row input[type="submit"]:hover {
     background-color: #3fa0d9;
-    color: #fff;
 }
-
-.sidebar a span {
-    display: block;
-}
-

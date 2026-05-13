@@ -1,20 +1,27 @@
-/* Portal emprendedor — estilo plano, sin adornos, igual que el admin */
+/* ================================================================
+   EMPRENDEDORES CSS — Portal de usuarios finales
+   AISLAMIENTO: todos los selectores usan IDs/clases con prefijo
+   #emp-* o .emp-* / clases propias, sin conflicto con el admin.
+   Paleta: header/acento #55acee · sidebar #1870c1 · fondo #f8f9fa
+   ================================================================ */
+
 :root {
-    --emp-primary:   #4caaf6;   /* mismo que --secondary del admin (style.css) */
-    --emp-sidebar:   #1870c1;
+    --emp-primary:   #55acee;  /* mismo azul que el header del admin */
+    --emp-sidebar:   #1870c1;  /* mismo azul del sidebar del admin  */
     --emp-sidebar-w: 220px;
-    --emp-header-h:  42px;
+    --emp-header-h:  70px;     /* misma altura que el header del admin */
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
+    font-family: Arial, sans-serif;
     font-size: 13px;
     color: #333;
     background: #f8f9fa;
 }
 
-/* ── Header ──────────────────────────────────────────────── */
+/* ── Encabezado fijo ─────────────────────────────────────────── */
 #emp-header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -32,15 +39,15 @@ body {
 
 .emp-logout-btn {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     color: #fff;
     padding: 3px 10px;
     cursor: pointer;
     font-size: 12px;
 }
-.emp-logout-btn:hover { background: rgba(255,255,255,0.1); }
+.emp-logout-btn:hover { background: rgba(255, 255, 255, 0.1); }
 
-/* ── Sidebar ─────────────────────────────────────────────── */
+/* ── Sidebar lateral fijo ────────────────────────────────────── */
 #emp-sidebar {
     position: fixed;
     top: var(--emp-header-h);
@@ -53,15 +60,16 @@ body {
     flex-direction: column;
     gap: 2px;
     z-index: 90;
+    overflow-y: auto;
 }
 
 #emp-sidebar a { color: #fff; text-decoration: none; padding: 10px; display: block; font-size: 13px; }
 #emp-sidebar a:hover  { background: rgba(0, 44, 92, 0.2); }
 #emp-sidebar a.active { background: rgba(0, 0, 0, 0.2); font-weight: bold; }
 
-/* ── Contenido ───────────────────────────────────────────── */
+/* ── Contenido principal ─────────────────────────────────────── */
 #emp-content {
-    margin-left: 250px;
+    margin-left: var(--emp-sidebar-w);
     margin-top: var(--emp-header-h);
     padding: 20px 28px;
 }
@@ -74,7 +82,7 @@ body {
     padding-bottom: 0;
 }
 
-/* ── Tabla de programas (igual que #result_list del admin) ── */
+/* ── Tabla de programas ──────────────────────────────────────── */
 .table-wrapper { overflow-x: auto; }
 
 .prog-table {
@@ -85,7 +93,7 @@ body {
 }
 
 .prog-table thead th {
-    background-color: #4caaf6;
+    background-color: var(--emp-primary);
     color: #fff;
     text-align: left;
     padding: 8px 10px;
@@ -121,7 +129,7 @@ body {
 
 .no-prog { color: #888; font-size: 13px; padding: 10px 0; }
 
-/* ── Tarjeta del programa inscrito ───────────────────────── */
+/* ── Tarjeta del programa inscrito ───────────────────────────── */
 .prog-card {
     background: #fff;
     border: 1px solid #ddd;
@@ -147,12 +155,12 @@ body {
 }
 .btn-obs:hover { background: #609ab6; }
 
-/* ── Modal de observaciones ──────────────────────────────── */
+/* ── Modal de observaciones ──────────────────────────────────── */
 .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 300;
     align-items: center;
     justify-content: center;
@@ -203,7 +211,7 @@ body {
 }
 .modal-submit:hover { background: #609ab6; }
 
-/* ── Formulario Mis Datos (estilo change_form del admin) ──── */
+/* ── Formulario Mis Datos ────────────────────────────────────── */
 .adm-page-title { font-size: 20px; font-weight: normal; color: #447e9b; margin-bottom: 14px; }
 
 .adm-form-wrap { max-width: 900px; }

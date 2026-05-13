@@ -1,6 +1,8 @@
 {% extends "admin/base.html" %}
 {% load static %}
 
+{% block bodyclass %}{{ block.super }} admin{% endblock %}
+
 {% block branding %}
 <div>
     <a href="{% url 'admin:index' %}">

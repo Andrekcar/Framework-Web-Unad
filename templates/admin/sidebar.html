@@ -1,7 +1,6 @@
 {% load static %}
 
-<link href="{% static 'core/css/style.css' %}" rel="stylesheet">
-
+{% if request.user.is_authenticated %}
 <nav class="sidebar">
     {# Enlaces rápidos del módulo de administración. #}
     <a href="{% url 'admin:core_emprendedor_add' %}">
@@ -17,3 +16,4 @@
         <span>Observaciones Programas</span>
     </a>
 </nav>
+{% endif %}

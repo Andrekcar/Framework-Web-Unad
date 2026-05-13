@@ -18,11 +18,14 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 from core.forms import EmprendedorPasswordResetForm
 from core.views import home, emp_home, inscribir, guardar_observacion, editar_emprendedor, programas_list
 
 urlpatterns = [
-    # Ruta para el panel de administración de Django
+    # /admin/ exacto → redirige directo al gestor de emprendedores
+    path('admin/', RedirectView.as_view(pattern_name='admin:core_emprendedor_changelist')),
+    # Resto de URLs del panel de administración
     path('admin/', admin.site.urls),
     
     #  formulario para ingresar el correo y reestablecer la contraseña
