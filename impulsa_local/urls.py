@@ -31,7 +31,7 @@ urlpatterns = [
     # Resto de URLs del panel de administración
     path('admin/', admin.site.urls),
     
-    #  formulario para ingresar el correo y reestablecer la contraseña
+    # formulario para ingresar el correo y reestablecer la contraseña
     path(
         "accounts/password_reset/",
         auth_views.PasswordResetView.as_view(form_class=EmprendedorPasswordResetForm),
