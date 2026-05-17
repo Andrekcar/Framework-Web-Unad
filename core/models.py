@@ -18,6 +18,7 @@ class Emprendedor(models.Model):
     telefono = models.CharField('Teléfono', max_length=20)
     # El email es único porque también se usa como nombre de usuario en el sistema de autenticación
     email = models.EmailField('Correo Electrónico', unique=True)
+    updated_at = models.DateTimeField('Última actualización', auto_now=True)
     direccion = models.CharField('Dirección', max_length=200)
     programa = models.ForeignKey('Programas', on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -34,7 +35,7 @@ class Programas(models.Model):
     def __str__(self):
         return self.nombre
 
-class observaciones (models.Model):
+class observaciones(models.Model):
     emprendedor = models.ForeignKey(Emprendedor, on_delete=models.CASCADE)
     programa = models.ForeignKey(Programas, on_delete=models.CASCADE)
     fecha = models.DateTimeField('Fecha de Observación', auto_now_add=True)

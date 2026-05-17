@@ -4,16 +4,19 @@
 <nav class="sidebar">
     {# Enlaces rápidos del módulo de administración. #}
     <a href="{% url 'admin:core_emprendedor_add' %}">
-        <span>Formulario de Emprendedores</span>
+        <span>Formulario Emprendedores</span>
     </a>
     <a href="{% url 'admin:core_emprendedor_changelist' %}">
-        <span>Gestor de Emprendedores</span>
+        <span>Gestor Emprendedores</span>
     </a>
     <a href="{% url 'admin:core_programas_changelist' %}">
-        <span>Programas de capacitacion</span>
+        <span>Programas Capacitacion</span>
     </a>
     <a href="{% url 'admin:core_observaciones_changelist' %}">
         <span>Observaciones Programas</span>
+    </a>
+    <a href="{% url 'reportes' %}">
+        <span>Reportes</span>
     </a>
 </nav>
 {% endif %}

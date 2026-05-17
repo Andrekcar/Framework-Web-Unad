@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'core/css/reportes.css' %}">
+{% endblock %}
+
+{% block content_title %}
+<h1>Reportes</h1>
+{% endblock %}
+
+{% block content %}
+<aside>
+    {% include "admin/sidebar.html" %}
+</aside>
+<main>
+    {{ block.super }}
+
+    <div class="reportes-container">
+        <article class="reporte-card reporte-grafico">
+            <h3>Emprendedores Activos</h3>
+            {% if img_barras %}
+            <img src="data:image/png;base64,{{ img_barras }}" alt="Gráfico de barras">
+            {% else %}
+            <p>No hay datos disponibles</p>
+            {% endif %}
+        </article>
+
+        <article class="reporte-card reporte-grafico">
+            <h3>Por Sector Económico</h3>
+            {% if img_pastel %}
+            <img src="data:image/png;base64,{{ img_pastel }}" alt="Gráfico de pastel">
+            {% else %}
+            <p>No hay datos disponibles</p>
+            {% endif %}
+        </article>
+
+        <article class="reporte-card reporte-grafico">
+            <h3>Programas Más Solicitados</h3>
+            {% if img_barras_h %}
+            <img src="data:image/png;base64,{{ img_barras_h }}" alt="Gráfico de barras horizontales">
+            {% else %}
+            <p>No hay datos disponibles</p>
+            {% endif %}
+        </article>
+    </div>
+{% endblock %}

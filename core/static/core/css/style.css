@@ -201,12 +201,22 @@ body.admin #header {
     left: 0;
     right: 0;
     height: 70px;
-    padding: 0 16px 0 240px; /* 240 = sidebar 220px + gap 20px */
+    padding: 0 16px 0 0;
     display: flex;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     z-index: 95;
     box-sizing: border-box;
+}
+
+/* Branding ocupa exactamente la columna del sidebar */
+body.admin #header #branding {
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 body.admin #header #user-tools {
@@ -437,12 +447,48 @@ body.admin .paginator {
 body.admin .vTextField {
     background-color: #ffffff;
     border: 1px solid #000000;
+    color: #000000;
+}
+
+body.admin .vLargeTextField {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+}
+
+body.admin .vDateField {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+}
+
+body.admin .vIntegerField {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
 }
 
 body.admin select,
 body.admin .vSelect {
     background-color: #ffffff;
     border: 1px solid #000000;
+}
+
+body.admin .submit-row {
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+body.admin .submit-row input[type="submit"] {
+    background-color: #55acee !important;
+    border: 2px solid #000000;
+    color: #ffffff !important;
+}
+
+body.admin .submit-row .deletelink {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000;
 }
 
 /* ── Mensajes flash en el admin ──────────────────────────────── */

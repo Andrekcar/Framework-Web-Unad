@@ -27,6 +27,13 @@ class EmprendedorAdmin(admin.ModelAdmin):
         }),
     )
 
+    def get_deleted_objects(self, objs, request):
+        deleted_objects, model_count, perms_needed, protected = super().get_deleted_objects(objs, request)
+        # observaciones se eliminan en cascada automáticamente (on_delete=CASCADE),
+        # no se requiere permiso explícito de borrado sobre ellas.
+        perms_needed.discard('observaciones')
+        return deleted_objects, model_count, perms_needed, protected
+
     def acciones(self, obj):
         # Enlaces rápidos en la lista de emprendedores: editar y eliminar.
         edit = reverse('admin:core_emprendedor_change', args=[obj.pk])
@@ -55,4 +62,3 @@ class ObservacionesAdmin(admin.ModelAdmin):
         return False
 
 admin.site.enable_nav_sidebar = False
-   

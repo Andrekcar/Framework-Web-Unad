@@ -4,12 +4,11 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordResetForm
 from django.conf import settings
 from urllib.parse import urlparse
-
 from .models import Emprendedor, observaciones
 
 
 class EmprendedorPasswordResetForm(PasswordResetForm):
-
+    
     def clean_email(self):
         email = self.cleaned_data['email']
         if not Emprendedor.objects.filter(email__iexact=email).exists():
